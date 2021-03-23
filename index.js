@@ -6,6 +6,7 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
 const renderPage = require("./src/renderPage");
+const { listenerCount } = require("node:events");
 
 const teamArray = [];
 
@@ -88,3 +89,14 @@ const internQuestions = [
 
     },
 ];
+
+const overallQuestions = [
+    type: function (){
+        return {
+            type: "list",
+            message: "Which type of team member would you like to add?",
+            name: "member",
+            choices: ["Engineer", "Intern", "No more members"]
+        }
+    }
+]
