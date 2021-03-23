@@ -91,7 +91,7 @@ const internQuestions = [
 ];
 
 const overallQuestions = [
-    type: function (){
+     function (){
         return {
             type: "list",
             message: "Which type of team member would you like to add?",
