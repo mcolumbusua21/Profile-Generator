@@ -6,7 +6,7 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
 const renderPage = require("./src/renderPage");
-const { listenerCount } = require("node:events");
+// const { listenerCount } = require("node:events");
 
 const teamArray = [];
 
@@ -98,5 +98,18 @@ const overallQuestions = [
             name: "member",
             choices: ["Engineer", "Intern", "No more members"]
         }
-    }
-]
+    },
+];
+
+function askQuestions () {
+    prompt(managerQuestions).then((data) => {
+        const manager = new Manager(
+            data.name,
+            data.id,
+            data.email,
+            data.officeNumber
+        );
+        teamArray.push(manager);
+        return askOverallQuestions ()
+    });
+};
