@@ -8,7 +8,7 @@ describe("Employee", () => {
             expect(typeof e).toBe("object");
         })
 
-        test("Can set name attribut with constructor", () => {
+        test("Can set name attribute with constructor", () => {
             const name = "Mark";
             const e = new Employee(name)
 
@@ -37,23 +37,22 @@ describe("getters", () => {
 
         expect(e.getName()).toBe(name);
     });
-    test("Can get name via getName () method", () => {
-        const name = "Mark";
-        const e = new Employee(name, 77, "mcolumbusua21@gmail.com");
+    test("Can get id via getID () method", () => {
+        const id = 77;
+        const e = new Employee("Mark", id, "mcolumbusua21@gmail.com");
 
-        expect(e.getName()).toBe(name);
+        expect(e.getId()).toBe(id);
     });
-    test("Can get name via getName () method", () => {
-        const name = "Mark";
-        const e = new Employee(name, 77, "mcolumbusua21@gmail.com");
+    test("Can get email via getEmail () method", () => {
+        const email = "mcolumbusua21@gmail.com";
+        const e = new Employee("Mark", 77, email);
 
-        expect(e.getName()).toBe(name);
+        expect(e.getEmail()).toBe(email);
     });
-    test("Can get name via getName () method", () => {
-        const name = "Mark";
-        const e = new Employee(name, 77, "mcolumbusua21@gmail.com");
+    test("Can get role via getRole () method", () => {
+        const e = new Employee("Mark", 77, "mcolumbusua21@gmail.com");
 
-        expect(e.getName()).toBe(name);
+        expect(e.getRole()).toBe("Employee");
     });
 
 })
