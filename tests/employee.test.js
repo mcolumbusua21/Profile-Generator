@@ -30,3 +30,30 @@ describe("Employee", () => {
 });
 });
 
+describe("getters", () => {
+    test("Can get name via getName () method", () => {
+        const name = "Mark";
+        const e = new Employee(name, 77, "mcolumbusua21@gmail.com");
+
+        expect(e.getName()).toBe(name);
+    });
+    test("Can get name via getName () method", () => {
+        const name = "Mark";
+        const e = new Employee(name, 77, "mcolumbusua21@gmail.com");
+
+        expect(e.getName()).toBe(name);
+    });
+    test("Can get name via getName () method", () => {
+        const name = "Mark";
+        const e = new Employee(name, 77, "mcolumbusua21@gmail.com");
+
+        expect(e.getName()).toBe(name);
+    });
+    test("Can get name via getName () method", () => {
+        const name = "Mark";
+        const e = new Employee(name, 77, "mcolumbusua21@gmail.com");
+
+        expect(e.getName()).toBe(name);
+    });
+
+})
