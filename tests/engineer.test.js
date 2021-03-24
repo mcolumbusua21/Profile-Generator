@@ -1,15 +1,15 @@
-const engineer = require("../lib/engineer");
+const Engineer = require("../lib/engineer");
 
 describe("Engineer", () => {
     describe("Initialization", () => {
         test("Can initialize an engineer object", () => {
-            const e = new engineer();
+            const e = new Engineer();
             expect(typeof e).toBe("object");
         });
 
         test("Can set name attribute with constructor", () => {
             const name = "Mark";
-            const e = new engineer(name)
+            const e = new Engineer(name)
 
             expect(e.name).toBe(name);
         });

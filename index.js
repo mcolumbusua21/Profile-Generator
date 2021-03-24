@@ -164,18 +164,19 @@ function askQuestions() {
           switch (answer.title) {
             case "Engineer":
               askEngineerQuestions();
-
+                const engineer = new Engineer;
               break;
 
             case "Intern":
               inquirer
                 askInternQuestions()
+                const intern = new Intern;
                 // .then((data) => console.log("intern data", data));
               break;
             default:
               console.log("No more stuff");
               break;
-          }
+          };
 
         //   console.log("SECOND QUESTION--->", answer);
         });
