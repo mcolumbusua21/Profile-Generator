@@ -85,5 +85,5 @@ let page = `
 </body>
 </html>
 `;
-page ();
+
 module.exports = renderPage;

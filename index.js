@@ -1,6 +1,6 @@
-const { prompt } = require("inquirer");
 const fs = require("fs");
-
+const path = require("path");
+const childproc = require('child_process');
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
@@ -11,31 +11,68 @@ const inquirer = require("inquirer");
 
 const teamArray = [];
 
-const managerQuestions = [
-  {
-    type: "input",
-    message: "Please enter the name of the manager:",
-    name: "name",
-  },
-  {
-    type: "input",
-    message: "Please enter the managers employee ID number:",
-    name: "id",
-  },
-  {
-    type: "input",
-    message: "Please enter the managers email address:",
-    name: "email",
-  },
-  {
-    type: "input",
-    message: "Please enter the office number:",
-    name: "office number",
-  },
-];
+function questionCallback(role) {
+    console.log(role);
+    if (role === 'Engineer') {
+        return askEngineerQuestions();
+    } else if (role === 'Intern') {
+        return askInternQuestions();
+    } else {
+        console.log(teamArray);
+        const html = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf-8');
+
+        const newHtml = html.replace('[teamArray]', JSON.stringify(teamArray));
+
+        fs.writeFileSync(path.join(__dirname, 'index.html'), newHtml);
+        if (fs.existsSync(path.join(__dirname, 'index.html'))) {
+            childproc.exec('open -a "Google Chrome" index.html');
+        }
+        process.exit(0);
+    }
+}; 
+
+const askManagerQuestions = () => {
+    const managerQuestions = [
+        {
+          type: "input",
+          message: "Please enter the name of the manager:",
+          name: "name",
+        },
+        {
+          type: "input",
+          message: "Please enter the managers employee ID number:",
+          name: "id",
+        },
+        {
+          type: "input",
+          message: "Please enter the managers email address:",
+          name: "email",
+        },
+        {
+          type: "input",
+          message: "Please enter the office number:",
+          name: "office number",
+        },
+      ];
+
+    return inquirer.prompt(managerQuestions)
+        .then((answers) => {
+
+            teamArray.push(new Manager(
+                ...answers);
+
+            return inquirer.prompt({
+                type: "list",
+                message: "Which type of team member would you like to add?",
+                choices: ["Engineer", "Intern", "No more members"],
+                name: "role",
+              }).then(({role}) => questionCallback(role));
+        );
+
+        };
 
 const askEngineerQuestions = () => {
-  inquirer
+  return inquirer
     .prompt([
       {
         type: "input",
@@ -60,29 +97,21 @@ const askEngineerQuestions = () => {
       {
         type: "list",
         message: "Which type of team member would you like to add?",
-        name: "member",
+        name: "role",
         choices: ["Engineer", "Intern", "No more members"],
       },
     ])
-    .then((data) => {
-      console.log(data);
-      switch (data.member) {
-        case "Engineer":
-          askEngineerQuestions();
-          break;
-
-        case "Intern":
-          askInternQuestions();
-          break;
-
-        default:
-          break;
-      }
+    .then(({ role, ...data}) => {
+        teamArray.push({
+            ...data,
+            role: 'Engineer'
+        });
+        return questionCallback(role);
     });
 };
 
 const askInternQuestions = () => {
-  inquirer.prompt([
+  return inquirer.prompt([
     {
       type: "input",
       message: "Please enter the name of the intern:",
@@ -106,26 +135,19 @@ const askInternQuestions = () => {
     {
         type: "list",
         message: "Which type of team member would you like to add?",
-        name: "member",
+        name: "role",
         choices: ["Engineer", "Intern", "No more members"],
       },
   ])
-  .then((data) => {
-    console.log(data);
-    switch (data.member) {
-      case "Engineer":
-        askEngineerQuestions();
-        break;
-
-      case "Intern":
-        askInternQuestions();
-        break;
-
-      default:
-        break;
-    };
-});
+  .then(({role, ...data}) => {
+      teamArray.push({
+          ...data,
+          role: 'Intern'
+      })
+      return questionCallback(role);
+  });
 };
+
 // const overallQuestions = [
 //   function () {
 //     return {
@@ -137,6 +159,7 @@ const askInternQuestions = () => {
 //   },
 // ];
 
+/*
 function askQuestions() {
   inquirer
     .prompt(managerQuestions)
@@ -182,8 +205,9 @@ function askQuestions() {
         });
     });
 };
+*/
 
-
-askQuestions();
-renderPage ();
-teamArray ();
+askManagerQuestions()
+    .then(() => askInternQuestions())
+    .then(() => askQuestions())
+    .then(() => renderPage());
