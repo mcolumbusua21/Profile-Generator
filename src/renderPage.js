@@ -13,7 +13,7 @@ function renderPage(teamArray) {
                           <div class="card-body">
                               <ul class="list-group">
                                   <li class="list-group-item"> ID: ${teamArray[i].id}</li>
-                                  <li class="list-group-item"> Office Number: ${teamArray[i].officeNumber}</li>
+                                  <li class="list-group-item"> Office Number: ${teamArray[i].number}</li>
                                   <li class="list-group-item"> Email: <a href="mailto:${teamArray[i].email}">${teamArray[i].email}</a></li>
                               </ul>
                           </div>
