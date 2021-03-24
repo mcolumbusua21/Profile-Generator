@@ -185,3 +185,5 @@ function askQuestions() {
 
 
 askQuestions();
+renderPage ();
+teamArray ();
