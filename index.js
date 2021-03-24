@@ -125,7 +125,7 @@ const askInternQuestions = () => {
         break;
     };
 });
-
+};
 // const overallQuestions = [
 //   function () {
 //     return {

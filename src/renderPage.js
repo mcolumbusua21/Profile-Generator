@@ -1,6 +1,6 @@
-const { divide } = require("lodash");
+// const { divide } = require("lodash");
 
-function renderPage(team) {
+function renderPage(data) {
     let employees = "";
     for (let i = 0; i < team.length; i++) {
         if(team[i].role === "Manager") {
@@ -80,7 +80,7 @@ let page = `
     <title>Profile Generator</title>
 </head>
 <body>
-    ${employees}
+    
 </body>
 </html>
 `;
