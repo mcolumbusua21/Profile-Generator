@@ -24,7 +24,7 @@ function questionCallback(role) {
       "utf-8"
     );
 
-    const newHtml = html.replace("[teamArray]", JSON.stringify(teamArray));
+    const newHtml = html.replace("[teamArray]", renderPage(teamArray));
 
     fs.writeFileSync(path.join(__dirname, "index.html"), newHtml);
     if (fs.existsSync(path.join(__dirname, "index.html"))) {
@@ -63,87 +63,7 @@ const askManagerQuestions = () => {
       ...answers,
       role: "Manager",
     });
-    function renderPage(teamArray) {
-      let employees = "";
-      for (let i = 0; i < teamArray.length; i++) {
-        if (teamArray[i].role === "Manager") {
-          employees += `
-                        <div class= "card employee-card" id="Manager">
-                            <div class= "card-header">
-                                <h2 class= "card-title">${teamArray[i].name}</h2>
-                                <h3 class= "card-title"><i class="fas fa-mug-hot mr-2"></i>${teamArray[i].role}</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group">
-                                    <li class="list-group-item"> ID: ${teamArray[i].id}</li>
-                                    <li class="list-group-item"> Office Number: ${teamArray[i].officeNumber}</li>
-                                    <li class="list-group-item"> Email: <a href="mailto:${teamArray[i].email}">${team[i].email}</a></li>
-                                </ul>
-                            </div>
-                        </div>`;
-        } else if (teamArray[i].role === "Engineer") {
-          emlpoyees += `
-                        <div class= "card employee-card" id="Engineer">
-                            <div class= "card-header">
-                                <h2 class= "card-title">${teamArray[i].name}</h2>
-                                <h3 class= "card-title"><i class="fas fa-mug-hot mr-2"></i>${team[i].role}</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group">
-                                    <li class="list-group-item"> ID: ${teamArray[i].id}</li>
-                                    <li class="list-group-item"> Email: <a href="mailto:${teamArray[i].email}">${teamArray[i].email}</a></li>
-                                    <li class="list-group-item"> GitHub: <a href="http://github.com/:${teamArray[i].github}"> target="_blank">${teamArray[i].github}</a></li>
-                                </ul>
-                            </div>
-                        </div>`;
-          emlpoyees += `
-                        <div class= "card employee-card" id="Engineer">
-                            <div class= "card-header">
-                                <h2 class= "card-title">${teamArray[i].name}</h2>
-                                <h3 class= "card-title"><i class="fas fa-mug-hot mr-2"></i>${teamArray[i].role}</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group">
-                                    <li class="list-group-item"> ID: ${teamArray[i].id}</li>
-                                    <li class="list-group-item"> Email: <a href="mailto:${teamArray[i].email}">${teamArray[i].email}</a></li>
-                                    <li class="list-group-item"> GitHub: <a href="http://github.com/:${teamArray[i].github}"> target="_blank">${teamArray[i].github}</a></li>
-                                </ul>
-                            </div>
-                        </div>`;
-        } else {
-          emlpoyees += `
-                    <div class= "card employee-card" id="Intern">
-                        <div class= "card-header">
-                            <h2 class= "card-title">${teamArray[i].name}</h2>
-                            <h3 class= "card-title"><i class="fas fa-mug-hot mr-2"></i>${teamArray[i].role}</h3>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group">
-                                <li class="list-group-item"> ID: ${teamArray[i].id}</li>
-                                <li class="list-group-item"> Email: <a href="mailto:${teamArray[i].email}">${teamArray[i].email}</a></li>
-                                <li class="list-group-item"> School: ${teamArray[i].school}</li>
-                            </ul>
-                        </div>
-                    </div>`;
-          let = `
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <script src="script.js"></script>
-                <link rel="stylesheet" href="./style.css">
-                <title>Profile Generator</title>
-            </head>
-            <body>
-                
-            </body>
-            </html>
-            `;
-        }
-      }
-    }
+   
 
     return inquirer
       .prompt({
