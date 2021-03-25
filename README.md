@@ -62,6 +62,7 @@ github.com/mcolumbusua21
 
 ## Link 
 
+https://mcolumbusua21.github.io/Profile-Generator/
 
 ## Usage 
 This is to help set up a team that you will be working with.
